@@ -4,12 +4,7 @@ let geminiClient: any = null;
 const apiKey = import.meta.env.VITE_API_KEY;
 
 if (apiKey) {
-  try {
-    // 実際のGeminiクライアント初期化処理
-    geminiClient = new GeminiClient(apiKey);
-  } catch (err) {
-    console.error("Gemini初期化エラー:", err);
-  }
+  console.warn("APIキーは設定されていますが、現在AI機能は無効化中です。");
 } else {
   console.warn("API_KEYが設定されていません。AI機能は無効化されます。");
 }
