@@ -1,0 +1,7 @@
+{
+  "name": "Bowling Form AI Coach",
+  "description": "An application to record your bowling scores, analyze your form with AI, and compare it with professional players.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
