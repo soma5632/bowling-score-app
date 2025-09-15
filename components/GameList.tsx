@@ -19,10 +19,10 @@ const GameList: React.FC<GameListProps> = ({ games, onSelectGame, onStartNewGame
         onClick={onStartNewGame}
         className="w-full bg-gradient-to-r from-brand-primary to-brand-secondary text-white font-bold py-4 px-4 rounded-lg shadow-lg hover:scale-105 transform transition-transform duration-200 text-lg"
       >
-        + Start New Game
+        + 新しくゲームを追加
       </button>
       <div>
-        <h2 className="text-2xl font-bold mb-4 text-brand-text">Game History</h2>
+        <h2 className="text-2xl font-bold mb-4 text-gray-900">ゲーム履歴</h2>
         {sortedGames.length > 0 ? (
           <ul className="space-y-3">
             {sortedGames.map(game => (

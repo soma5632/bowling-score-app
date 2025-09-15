@@ -10,7 +10,7 @@ interface GameListItemProps {
 }
 
 const GameListItem: React.FC<GameListItemProps> = ({ game, onSelect, onDelete }) => {
-  const formattedDate = new Date(game.date).toLocaleDateString('en-US', {
+  const formattedDate = new Date(game.date).toLocaleDateString('ja-JP', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -34,15 +34,15 @@ const GameListItem: React.FC<GameListItemProps> = ({ game, onSelect, onDelete })
         </div>
         <div>
           <p className="font-bold text-brand-text">{formattedDate}</p>
-          <p className="text-sm text-brand-text-secondary">Total Score: <span className="font-semibold text-brand-text">{game.totalScore}</span></p>
+          <p className="text-sm text-white">合計スコア: <span className="font-semibold text-white">{game.totalScore}</span></p>
         </div>
       </div>
       <button
         onClick={handleDelete}
-        className="text-gray-500 hover:text-red-500 transition-colors p-2 rounded-full text-xs"
+        className="text-white hover:text-red-500 transition-colors p-2 rounded-full text-xs"
         aria-label="Delete game"
       >
-        DELETE
+        消去
       </button>
     </li>
   );
