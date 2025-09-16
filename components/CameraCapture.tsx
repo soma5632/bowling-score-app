@@ -14,13 +14,31 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({ onCapture, onCancel }) =>
   const [countdown, setCountdown] = useState<number | null>(null);
   const [stream, setStream] = useState<MediaStream | null>(null);
 
-  // 外カメラ起動
+  // 外カメラ優先で起動
   const startCamera = useCallback(async () => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: { exact: 'environment' } },
+      // まず facingMode で試す（初回アクセス用）
+      let constraints: MediaStreamConstraints = {
+        video: { facingMode: 'environment' },
         audio: false
-      });
+      };
+
+      // すでに許可済みなら enumerateDevices で外カメラを探す
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      const videoDevices = devices.filter(d => d.kind === 'videoinput');
+      const backCamera = videoDevices.find(d =>
+        d.label.toLowerCase().includes('back') ||
+        d.label.toLowerCase().includes('environment')
+      );
+
+      if (backCamera) {
+        constraints = {
+          video: { deviceId: { exact: backCamera.deviceId } },
+          audio: false
+        };
+      }
+
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
       setStream(stream);
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
